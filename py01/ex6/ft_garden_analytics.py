@@ -7,17 +7,39 @@ class GardenManager:
             print(f"Total gardens managed: {len(GardenManager.gardens)}")
 
         @staticmethod
-        def count_points(owner):
+        def height_validation(owner: str):
             gardens = GardenManager.gardens
-            points = 0
             for plants in gardens[owner]:
-                points += 10 + plants.height
-                if type(plants) is PrizeFlower:
-                    points += 10
-            return points
+                if plants.grew > 0:
+                    if plants.grew <= 0:
+                        print("\nHeight validation test: False")
+                else:
+                    if plants.height <= 0:
+                        print("\nHeight validation test: False")
+            print("\nHeight validation test: True")
 
         @staticmethod
-        def count_plants(owner):
+        def count_points():
+            gardens = GardenManager.gardens
+            print("Garden scores - ", end="")
+            is_first = True
+            for owner in gardens.keys():
+                if is_first is False:
+                    print(", ", end="")
+                points = 0
+                for plants in gardens[owner]:
+                    if plants.grew > 0:
+                        points += 10 + plants.grew
+                    else:
+                        points += 10 + plants.height
+                    if type(plants) is PrizeFlower:
+                        points += 10
+                is_first = False
+                print(f"{owner}: {points}", end="")
+            print("")
+
+        @staticmethod
+        def count_plants(owner: str):
             gardens = GardenManager.gardens
             plants_count = len(GardenManager.gardens[owner])
             total_growth = 0
@@ -42,17 +64,16 @@ class GardenManager:
     def create_garden_network(cls, p_owner: str, p_type: str):
         if p_owner not in cls.gardens:
             cls.gardens.update({p_owner: list()})
-        cls.gardens[p_owner].append(p_type)
+        if p_type is not None:
+            cls.gardens[p_owner].append(p_type)
 
     @classmethod
     def watering_plant(cls, owner):
-        print(f"\n{owner} is helping all plants grow...")
         for plants in cls.gardens[owner]:
             if plants.grew > 0:
                 plants.grew += 1
             else:
                 plants.grew += plants.height + 1
-            print(f"{plants.name} grew 1cm")
 
     @classmethod
     def check_plants(cls, owner):
@@ -69,12 +90,35 @@ class GardenManager:
             elif type(plants) is PrizeFlower:
                 print(f"""- {plants.name}: {height}cm, {plants.color}\
  flowers (blooming), Prize points: 10""")
-                
-    @classmethod
-    def demo(cls, owner):
-        
-        
 
+    @classmethod
+    def demo(cls, owner, grow):
+        print("\033[2J\033[H=== Garden Management System Demo ===\n")
+        if not cls.gardens[owner]:
+            print(f"{owner} have no plants...")
+            return
+        for plants in cls.gardens[owner]:
+            print(f"Added {plants.name} to {owner}'s garden")
+        if grow > 0:
+            print(f"\n{owner} is helping all plants grow...")
+            for i in range(grow):
+                cls.watering_plant(owner)
+            for plants in cls.gardens[owner]:
+                print(f"- {plants.name} grew {plants.grew - plants.height}cm")
+
+    @staticmethod
+    def report(owner):
+        """
+        docstring
+        """
+        manager = GardenManager()
+        stats = manager.GardenStats()
+        print(f"\n=== {owner}'s Garden Report ===")
+        manager.check_plants(owner)
+        stats.count_plants(owner)
+        stats.height_validation(owner)
+        stats.count_points()
+        stats.count_gardens()
 
 
 class Plant():
@@ -91,7 +135,6 @@ class Plant():
         self.height = p_height
         self.grew = 0
         GardenManager.create_garden_network(p_owner, self)
-        print(f"Added {self.name} to {p_owner}'s garden")
 
 
 class FloweringPlant(Plant):
@@ -105,17 +148,41 @@ class PrizeFlower(FloweringPlant):
         super().__init__(p_name, p_height, p_owner, p_color)
 
 
-owner = 'Alice'
-manager = GardenManager()
-stats = manager.GardenStats()
-print("=== Garden Management System Demo ===\n")
-Plant('Oak Tree', 100, 'Alice')
-FloweringPlant('Rose', 25, 'Alice', 'red')
-PrizeFlower('Sunflower', 50, 'Alice', 'yellow')
-manager.watering_plant(owner)
-print(f"\n=== {owner}'s Garden Report ===")
-manager.check_plants(owner)
-stats.count_plants(owner)
-GardenManager.create_garden_network('Bob', None)
-GardenManager.create_garden_network('Bob', [Plant('Hello', 32, 'Bob')])
-stats.count_gardens()
+def main():
+    v = '\033[1;32m'
+    n = '\033[0m'
+    nb_owner = int(input('\nNumber of garden owners : '))
+    garden_owners = []
+    for i in range(nb_owner):
+        garden_owners.append(str(input(f"Name for owner no {i + 1} : ")))
+    print("\nWho will be reporting ? ")
+    boolean = None
+    owner = str()
+    for owners in garden_owners:
+        GardenManager.create_garden_network(owners, None)
+        if boolean not in ('y', 'yes', 'Y'):
+            boolean = str(input(f"{owners} ? [Y / n] "))
+            if boolean in ('y', 'yes', 'Y'):
+                owner = owners
+    nb_plant = int(input('\nHow many plants do you want to create (total) ? '))
+    for i in range(nb_plant):
+        type_plant = int(input(f"""\nType for plant {i + 1} : \
+{v}[0]{n} Regular - {v}[1]{n} Flowering - {v}[2]{n} Prize Flower\n-> """))
+        plant_name = str(input("\nName : "))
+        plant_owner = str(input("Owner : "))
+        plant_height = int(input("Height : "))
+        if type_plant == 0:
+            Plant(plant_name, plant_height, plant_owner)
+        elif type_plant == 1:
+            plant_color = str(input("Color : "))
+            FloweringPlant(plant_name, plant_height, plant_owner, plant_color)
+        elif type_plant == 2:
+            plant_color = str(input("Color : "))
+            PrizeFlower(plant_name, plant_height, plant_owner, plant_color)
+    grow = int(input("\nNumber of watering : "))
+
+    GardenManager.demo(owner, grow)
+    GardenManager.report(owner)
+
+
+main()

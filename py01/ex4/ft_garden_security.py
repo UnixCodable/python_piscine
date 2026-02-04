@@ -43,7 +43,7 @@ Security: Negative age rejected""")
         """Getter made to securely retrieve plant age"""
         return self.__age_value
 
-    def get_height(self):
+    def get_height(self) -> int:
         """Getter made to securely retrieve plant height"""
         return self.__height
 
