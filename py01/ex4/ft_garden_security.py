@@ -1,6 +1,18 @@
+# ************************************************************************* #
+#                                                                           #
+#                                                      :::      ::::::::    #
+#  ft_garden_security.py                             :+:      :+:    :+:    #
+#                                                  +:+ +:+         +:+      #
+#  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
+#                                              +#+#+#+#+#+   +#+            #
+#  Created: 2026/02/09 13:03:12 by lbordana        #+#    #+#               #
+#  Updated: 2026/02/09 13:15:07 by lbordana        ###   ########.fr        #
+#                                                                           #
+# ************************************************************************* #
+
 class SecurePlant:
     """A secure class defining a plant"""
-    def __init__(self, p_name: str):
+    def __init__(self, p_name: str) -> None:
         """Initialize plant with their identity
 
         Args:
@@ -11,7 +23,7 @@ class SecurePlant:
         self.__age_value = 0
         print(f"Plant created: {p_name}")
 
-    def set_height(self, p_height: int):
+    def set_height(self, p_height: int) -> None:
         """Setter made to encapsulate access to height data. Update an height.
 
         Args:
@@ -25,7 +37,7 @@ class SecurePlant:
 Invalid operation attempted: height {p_height}cm [REJECTED]
 Security: Negative height rejected""")
 
-    def set_age(self, p_age: int):
+    def set_age(self, p_age: int) -> None:
         """Setter made to encapsulate access to age data. Update an age.
 
         Args:
@@ -39,7 +51,7 @@ Security: Negative height rejected""")
 Invalid operation attempted: age {p_age} days [REJECTED]
 Security: Negative age rejected""")
 
-    def get_age(self):
+    def get_age(self) -> int:
         """Getter made to securely retrieve plant age"""
         return self.__age_value
 

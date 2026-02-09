@@ -1,6 +1,18 @@
+# ************************************************************************* #
+#                                                                           #
+#                                                      :::      ::::::::    #
+#  ft_plant_types.py                                 :+:      :+:    :+:    #
+#                                                  +:+ +:+         +:+      #
+#  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
+#                                              +#+#+#+#+#+   +#+            #
+#  Created: 2026/02/09 13:03:03 by lbordana        #+#    #+#               #
+#  Updated: 2026/02/09 13:33:10 by lbordana        ###   ########.fr        #
+#                                                                           #
+# ************************************************************************* #
+
 class Plant:
     """A class defining a plant"""
-    def __init__(self, p_name: str, p_height: int, p_age: int):
+    def __init__(self, p_name: str, p_height: int, p_age: int) -> None:
         """Initialize plant with their identity
 
         Args:
@@ -20,7 +32,7 @@ class Tree(Plant):
         Plant (object): Include basic plant features.
     """
     def __init__(self, p_name: str, p_height: int, p_age: int,
-                 p_trunk_diameter: int):
+                 p_trunk_diameter: int) -> None:
         """Initialize a plant of tree object type
 
         Args:
@@ -32,7 +44,7 @@ class Tree(Plant):
         super().__init__(p_name, p_height, p_age)
         self.trunk_diameter = p_trunk_diameter
 
-    def produce_shade(self):
+    def produce_shade(self) -> None:
         """Indicating the produced shade of the tree.
         """
         print(f"{self.name} provides {self.trunk_diameter * 2}\
@@ -45,7 +57,8 @@ class Flower(Plant):
     Args:
         Plant (object): Include basic plant features.
     """
-    def __init__(self, p_name: str, p_height: int, p_age: int, p_color: str):
+    def __init__(self, p_name: str, p_height: int, p_age: int,
+                 p_color: str) -> None:
         """Initialize a plant of flower object type
 
         Args:
@@ -57,7 +70,7 @@ class Flower(Plant):
         super().__init__(p_name, p_height, p_age)
         self.color = p_color
 
-    def bloom(self):
+    def bloom(self) -> None:
         """Indicating the blooming moment of the flower
         """
         print(f"{self.name} is blooming beautifully !\n")
@@ -70,7 +83,8 @@ class Vegetable(Plant):
         Plant (object): Include basic plant features.
     """
     def __init__(self, p_name: str, p_height: int,
-                 p_age: int, p_harvest_season: str, p_nutritional_value: str):
+                 p_age: int, p_harvest_season: str,
+                 p_nutritional_value: str) -> None:
         """Initialize a plant of vegetable object type
 
         Args:

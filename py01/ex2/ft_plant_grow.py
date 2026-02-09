@@ -1,6 +1,18 @@
+# ************************************************************************* #
+#                                                                           #
+#                                                      :::      ::::::::    #
+#  ft_plant_grow.py                                  :+:      :+:    :+:    #
+#                                                  +:+ +:+         +:+      #
+#  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
+#                                              +#+#+#+#+#+   +#+            #
+#  Created: 2026/02/09 13:03:55 by lbordana        #+#    #+#               #
+#  Updated: 2026/02/09 13:14:06 by lbordana        ###   ########.fr        #
+#                                                                           #
+# ************************************************************************* #
+
 class Plant:
     """A class defining a plant"""
-    def __init__(self, p_name: str, p_height: int, p_age: int):
+    def __init__(self, p_name: str, p_height: int, p_age: int) -> None:
         """Initialize plant with their identity
 
         Args:
@@ -12,15 +24,15 @@ class Plant:
         self.height = p_height
         self.age_value = p_age
 
-    def age(self, days_passed: int):
+    def age(self, days_passed: int) -> None:
         """Increment age with passed days since the plant was created"""
         self.age_value += days_passed
 
-    def grow(self, days_passed: int):
+    def grow(self, days_passed: int) -> None:
         """Increment height with passed days since the plant was created"""
         self.height += days_passed
 
-    def get_info(self, days_passed: int):
+    def get_info(self, days_passed: int) -> None:
         """Print plant info after days have passed"""
         print(f"=== Day {days_passed} ===")
         print(f"{self.name}: {self.height}cm, {self.age_value} days old")

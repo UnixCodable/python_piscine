@@ -1,6 +1,18 @@
+# ************************************************************************* #
+#                                                                           #
+#                                                      :::      ::::::::    #
+#  ft_plant_factory.py                               :+:      :+:    :+:    #
+#                                                  +:+ +:+         +:+      #
+#  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
+#                                              +#+#+#+#+#+   +#+            #
+#  Created: 2026/02/09 13:03:47 by lbordana        #+#    #+#               #
+#  Updated: 2026/02/09 13:14:29 by lbordana        ###   ########.fr        #
+#                                                                           #
+# ************************************************************************* #
+
 class Plant:
     """A class defining a plant"""
-    def __init__(self, p_name: str, p_height: int, p_age: int):
+    def __init__(self, p_name: str, p_height: int, p_age: int) -> None:
         """Initialize plant with their identity
 
         Args:

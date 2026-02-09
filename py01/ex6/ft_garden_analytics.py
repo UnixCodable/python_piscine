@@ -1,13 +1,32 @@
+# ************************************************************************* #
+#                                                                           #
+#                                                      :::      ::::::::    #
+#  ft_garden_analytics.py                            :+:      :+:    :+:    #
+#                                                  +:+ +:+         +:+      #
+#  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
+#                                              +#+#+#+#+#+   +#+            #
+#  Created: 2026/02/09 11:56:05 by lbordana        #+#    #+#               #
+#  Updated: 2026/02/09 15:07:14 by lbordana        ###   ########.fr        #
+#                                                                           #
+# ************************************************************************* #
+
 class GardenManager:
     gardens = {}
 
     class GardenStats:
         @staticmethod
-        def count_gardens():
+        def count_gardens() -> None:
+            """Count all gardens
+            """
             print(f"Total gardens managed: {len(GardenManager.gardens)}")
 
         @staticmethod
-        def height_validation(owner: str):
+        def height_validation(owner: str) -> None:
+            """Height validation test, checking if above 0
+
+            Args:
+                owner (str): The owner of the garden to make the test
+            """
             gardens = GardenManager.gardens
             for plants in gardens[owner]:
                 if plants.grew > 0:
@@ -19,7 +38,9 @@ class GardenManager:
             print("\nHeight validation test: True")
 
         @staticmethod
-        def count_points():
+        def count_points() -> None:
+            """Count total points for all gardens
+            """
             gardens = GardenManager.gardens
             print("Garden scores - ", end="")
             is_first = True
@@ -39,7 +60,12 @@ class GardenManager:
             print("")
 
         @staticmethod
-        def count_plants(owner: str):
+        def count_plants(owner: str) -> None:
+            """Count number of plants for a owner and their growth
+
+            Args:
+                owner (str): The owner of the garden
+            """
             gardens = GardenManager.gardens
             plants_count = len(GardenManager.gardens[owner])
             total_growth = 0
@@ -61,14 +87,25 @@ class GardenManager:
  flowering, {prize_plant} prize flowers")
 
     @classmethod
-    def create_garden_network(cls, p_owner: str, p_type: str):
+    def create_garden_network(cls, p_owner: str, p_type: str) -> None:
+        """Add plants and owners to a global dict in the class
+
+        Args:
+            p_owner (str): Owner of the garden
+            p_type (str): Type of the plant (object)
+        """
         if p_owner not in cls.gardens:
             cls.gardens.update({p_owner: list()})
         if p_type is not None:
             cls.gardens[p_owner].append(p_type)
 
     @classmethod
-    def watering_plant(cls, owner):
+    def watering_plant(cls, owner: str) -> None:
+        """Watering session that make plant grow by 1cm
+
+        Args:
+            owner (str): The owner of the garden doing the watering
+        """
         for plants in cls.gardens[owner]:
             if plants.grew > 0:
                 plants.grew += 1
@@ -76,7 +113,12 @@ class GardenManager:
                 plants.grew += plants.height + 1
 
     @classmethod
-    def check_plants(cls, owner):
+    def check_plants(cls, owner: str) -> None:
+        """Check plants in the garden
+
+        Args:
+            owner (str): The owner of the garden to check
+        """
         print("\nPlants in garden")
         for plants in cls.gardens[owner]:
             height = plants.height
@@ -92,7 +134,13 @@ class GardenManager:
  flowers (blooming), Prize points: 10""")
 
     @classmethod
-    def demo(cls, owner, grow):
+    def demo(cls, owner: str, grow: int) -> None:
+        """Create the demo announce of the analytics
+
+        Args:
+            owner (str): Owner of the garden that is reporting
+            grow (int): The number of watering session needed
+        """
         print("\033[2J\033[H=== Garden Management System Demo ===\n")
         if not cls.gardens[owner]:
             print(f"{owner} have no plants...")
@@ -107,10 +155,8 @@ class GardenManager:
                 print(f"- {plants.name} grew {plants.grew - plants.height}cm")
 
     @staticmethod
-    def report(owner):
-        """
-        docstring
-        """
+    def report(owner) -> None:
+        """Create a report of the gardens"""
         manager = GardenManager()
         stats = manager.GardenStats()
         print(f"\n=== {owner}'s Garden Report ===")
@@ -123,13 +169,13 @@ class GardenManager:
 
 class Plant():
     """A class defining a plant"""
-    def __init__(self, p_name: str, p_height: int, p_owner: str):
+    def __init__(self, p_name: str, p_height: int, p_owner: str) -> None:
         """Initialize plant with their identity
 
         Args:
             p_name (string): The name of the plant
             p_height (int): The height of the plant in centimeters
-            p_age (int): The age of the plant
+            p_owner (int): The owner of the plant
         """
         self.name = p_name
         self.height = p_height
@@ -138,17 +184,38 @@ class Plant():
 
 
 class FloweringPlant(Plant):
-    def __init__(self, p_name: str, p_height: int, p_owner: str, p_color: str):
+    """A class defining a flowering plant of type Plant by inheritance"""
+    def __init__(self, p_name: str, p_height: int, p_owner: str,
+                 p_color: str) -> None:
+        """Initialize the Plant adding a color argument
+
+        Args:
+            p_name (str): The name of the plant
+            p_height (int): The height of the plant in centimeters
+            p_owner (str): The owner of the plant
+            p_color (str): The color of the plant
+        """
         super().__init__(p_name, p_height, p_owner)
         self.color = p_color
 
 
 class PrizeFlower(FloweringPlant):
-    def __init__(self, p_name: str, p_height: int, p_owner: str, p_color: str):
+    """A class defining a prize flower of type FloweringPlant by inheritance"""
+    def __init__(self, p_name: str, p_height: int, p_owner: str,
+                 p_color: str) -> None:
+        """Initialize the PrizeFlower object with FloweringPlant arguments
+
+        Args:
+            p_name (str): The name of the plant
+            p_height (int): The height of the plant in centimeters
+            p_owner (str): The owner of the plant
+            p_color (str): The color of the plant
+        """
         super().__init__(p_name, p_height, p_owner, p_color)
 
 
-def main():
+def main() -> None:
+    """Optional main function to make garden analytics easier to use"""
     v = '\033[1;32m'
     n = '\033[0m'
     nb_owner = int(input('\nNumber of garden owners : '))
