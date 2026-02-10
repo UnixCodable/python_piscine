@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/09 22:02:57 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/10 17:50:53 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/10 21:43:09 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -32,6 +32,16 @@ def test_error_types() -> None:
             garden_operations(error)
         except Exception as err:
             print(f'Caught {err.args[0]}')
+    
+    print("\nTesting multiple errors together...")
+    try:
+        garden_operations(error_to_test[0])
+        garden_operations(error_to_test[1])
+        garden_operations(error_to_test[2])
+        garden_operations(error_to_test[3])
+    except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
+        print('Caught an error, but program continues !')
+    print('\nAll error types tested succesfully!')
 
 
 test_error_types()
