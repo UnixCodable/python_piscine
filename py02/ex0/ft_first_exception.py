@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/09 19:57:45 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/09 21:47:14 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/10 12:49:10 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -21,6 +21,7 @@ def check_temperature(temp_str: str) -> str:
     except ValueError:
         return f"Error : '{temp_str}' is not a valid number."
 
+
 def test_temperature_input() -> None:
     print("=== Garden Temperature Checker ===")
     print("\nTesting temperature: 25")
@@ -31,7 +32,8 @@ def test_temperature_input() -> None:
     print(check_temperature("100"))
     print("\nTesting temperature: -50")
     print(check_temperature("-50"))
-    print ("\nAll tests completed - program didn't crash !")
+    print("\nAll tests completed - program didn't crash !")
+
 
 if __name__ == "__main__":
     test_temperature_input()
