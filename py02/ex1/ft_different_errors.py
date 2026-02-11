@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/09 22:02:57 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/11 07:44:06 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/11 16:34:44 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -32,7 +32,7 @@ def test_error_types() -> None:
             garden_operations(error)
         except Exception as err:
             print(f'Caught {err.args[0]}')
-    
+
     print("\nTesting multiple errors together...")
     try:
         garden_operations(error_to_test[0])
