@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/09 22:02:57 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/10 21:43:09 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/11 07:44:06 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -44,4 +44,5 @@ def test_error_types() -> None:
     print('\nAll error types tested succesfully!')
 
 
-test_error_types()
+if __name__ == "__main__":
+    test_error_types()
