@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/11 15:12:40 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/11 16:32:08 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/12 14:11:38 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -29,7 +29,7 @@ def check_plant_health(plant_name: str, water_level: int,
     return f'Plant {plant_name} is healthy!'
 
 
-def test_plant_checks():
+def test_plant_checks() -> None:
     plants_to_check = [['tomato', 2, 3], [None, 2, 3], ['banana', 15, 3],
                        ['carrot', 2, 0]]
     to_test = ['good values', 'empty plant name', 'bad water level',
