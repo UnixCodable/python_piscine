@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/11 16:50:37 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/12 13:55:10 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/12 14:09:04 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -31,7 +31,7 @@ class GardenManager():
 
     @classmethod
     def add_plant(cls, p_name: str, p_water_level: int,
-                  p_sunlight_hours: int) -> str:
+                  p_sunlight_hours: int) -> None:
         try:
             if p_name is None:
                 raise ValueError('Error adding plant: Plant name cannot be '
@@ -41,8 +41,9 @@ class GardenManager():
                                  'garden!')
             cls.plants.update({p_name: [p_water_level, p_sunlight_hours]})
         except ValueError as e:
-            return e
-        return f'Added {p_name} successfully'
+            print(e)
+            return
+        print(f'Added {p_name} successfully')
 
     @classmethod
     def water_plants(cls) -> None:
@@ -55,32 +56,35 @@ class GardenManager():
         except WaterError as e:
             print('WaterError:', e)
         finally:
-            return 'Closing watering system (cleanup)'
+            print('Closing watering system (cleanup)')
 
     @classmethod
-    def check_plant_health(cls):
+    def check_plant_health(cls) -> None:
         for items in cls.plants:
-            if cls.plants[items][0] > 10:
-                raise WaterError(f'Error checking {items}:'
-                                 ' Water level {cls.plants[items][0]}'
-                                 ' is too high (max 10)')
-            if cls.plants[items][0] < 1:
-                raise WaterError(f'Error checking {items}:'
-                                 ' Water level {cls.plants[items][0]}'
-                                 ' is too low (min 1)')
-            if cls.plants[items][1] > 12:
-                raise PlantError('Error checking {items}: Sunlight hours'
-                                 f' {cls.plants[items][1]} is'
-                                 ' too high (max 12)')
-            if cls.plants[items][1] < 2:
-                raise PlantError('Error checking {items}: Sunlight hours'
-                                 f' {cls.plants[items][1]} is'
-                                 ' too low (min 2)')
+            try:
+                if cls.plants[items][0] > 10:
+                    raise WaterError(f'Error checking {items}:'
+                                     f' Water level {cls.plants[items][0]}'
+                                     ' is too high (max 10)')
+                if cls.plants[items][0] < 1:
+                    raise WaterError(f'Error checking {items}:'
+                                     f' Water level {cls.plants[items][0]}'
+                                     ' is too low (min 1)')
+                if cls.plants[items][1] > 12:
+                    raise PlantError('Error checking {items}: Sunlight hours'
+                                     f' {cls.plants[items][1]} is'
+                                     ' too high (max 12)')
+                if cls.plants[items][1] < 2:
+                    raise PlantError('Error checking {items}: Sunlight hours'
+                                     f' {cls.plants[items][1]} is'
+                                     ' too low (min 2)')
+            except (PlantError, WaterError) as e:
+                print(e)
+                return
             print(f'Plant {items} is healthy!')
-        return ''
 
     @classmethod
-    def system_status(cls):
+    def system_status(cls) -> None:
         try:
             if cls.tank == 0:
                 raise GardenError('GardenError: Not enough water in tank')
@@ -89,16 +93,16 @@ class GardenManager():
         print('System recovered and continuing...')
 
 
-def test_garden_management():
+def test_garden_management() -> None:
     print('=== Garden Management System ===')
     print('\nAdding plants to garden...')
-    plant_dic = [['tomato', 5, 8], ['lettuce', 5, 8], [None, 1, 2]]
+    plant_dic = [['tomato', 5, 8], ['lettuce', 15, 8], [None, 1, 2]]
     for items in plant_dic:
-        print(GardenManager.add_plant(items[0], items[1], items[2]))
+        GardenManager.add_plant(items[0], items[1], items[2])
     print('\nWatering plants...')
-    print(GardenManager.water_plants())
+    GardenManager.water_plants()
     print('\nChecking plant health...')
-    print(GardenManager.check_plant_health())
+    GardenManager.check_plant_health()
     print('\nTesting error recovery...')
     GardenManager.system_status()
     print('\nGarden management system test complete!')
