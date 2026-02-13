@@ -6,11 +6,12 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/12 22:59:53 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/12 23:37:05 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/13 12:50:24 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 import sys
+
 
 def scores():
     print('=== Player Score Analytics ===')
@@ -30,6 +31,7 @@ def scores():
     print(f'High score: {max(parsed_list)}')
     print(f'Low score: {min(parsed_list)}')
     print(f'Score range: {max(parsed_list) - min(parsed_list)}')
+
 
 if __name__ == '__main__':
     scores()
