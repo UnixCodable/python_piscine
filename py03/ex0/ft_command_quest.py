@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/12 19:55:35 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/13 12:29:10 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/13 12:29:26 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -25,6 +25,7 @@ def command():
             i += 1
             print(f'Argument {i}: {arg}')
     print(f'Total arguments: {len(arguments) + 1}')
+
 
 if __name__ == '__main__':
     command()
