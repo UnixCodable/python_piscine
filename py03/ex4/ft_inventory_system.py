@@ -26,13 +26,13 @@ def inventory_parsing() -> dict:
             raise ValueError(f'ValueError: Cannot parse items "{items}".')
         except IndexError:
             raise IndexError(f'IndexError: Value missing for "{items}".')
-    inventory = dict(sorted(inventory.items(), key=lambda item: item[1],
-                            reverse=True))
     return inventory
 
 
 def current_inventory(inventory: dict) -> None:
     print('\n=== Current Inventory ===')
+    inventory = dict(sorted(inventory.items(), key=lambda item: item[1],
+                            reverse=True))
     for items in inventory.items():
         percentage = float('%.1f' % (items[1] * 100 / sum(inventory.values())))
         print(f'{items[0]}: {items[1]} {'units' if items[1] > 1 else 'unit'} '
@@ -72,9 +72,9 @@ def inventory_data() -> None:
     print('\n=== Item Categories ===')
     print('')
     management_suggestions(inventory)
-    print('=== Dictonary Properties Demo ===')
-    print('Dictionary keys:')
-    print(items for items in list(inventory.keys()))
+    print('\n=== Dictonary Properties Demo ===')
+    print('Dictionary keys:', ', '.join([items for items in list(inventory.keys())]))
+    print('Dictionary values:', ', '.join([str(items) for items in list(inventory.values())]))
 
 
 if __name__ == '__main__':
