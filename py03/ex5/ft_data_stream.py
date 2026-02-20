@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/17 19:54:44 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/20 01:21:35 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/20 11:06:36 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,13 +17,13 @@ def process() -> Generator:
     yield ['alice', 5, 'killed monster']
     yield ['bob', 12, 'found treasure']
     yield ['charlie', 8, 'leveled up']
-    for nbr in range(341):
+    for _ in range(341):
         yield ['unknown', 11, 'uninteresting']
-    for nbr in range(88):
+    for _ in range(88):
         yield ['unknown', 7, 'found treasure']
-    for nbr in range(155):
+    for _ in range(155):
         yield ['unknown', 7, 'leveled up']
-    for nbr in range(413):
+    for _ in range(413):
         yield ['unknown', 5, 'uninteresting']
 
 
