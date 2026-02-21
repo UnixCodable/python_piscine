@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/12 23:41:03 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/13 16:40:24 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/21 16:26:44 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -47,11 +47,14 @@ if __name__ == '__main__':
                 print(f'Parsed position: {parse_coordinate(items)}')
                 print(f'Distance between {base} and {parse_coordinate(items)}:'
                       f' {get_distance(base, parse_coordinate(items))}\n')
-            except ValueError as e:
+            except (ValueError, IndexError) as e:
                 print('Error parsing coordinates:', e)
                 print(f'Error details - Type ValueError, Args: {e.args}\n')
         print('Unpacking demonstration:')
     for coordinates in parsed:
-        x, y, z = coordinates
-        print(f'Player at x={x} y={y} z={z}')
-        print(f'Coordinates: X={x} Y={y} Z={z}\n')
+        try:
+            x, y, z = coordinates
+            print(f'Player at x={x} y={y} z={z}')
+            print(f'Coordinates: X={x} Y={y} Z={z}\n')
+        except ValueError as e:
+            print('ValueError:', e)
