@@ -6,14 +6,14 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/12 19:55:35 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/13 12:50:19 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/21 17:39:28 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 import sys
 
 
-def command():
+def command() -> None:
     arguments = sys.argv[1:]
     print('=== Command Quest ===')
     if len(arguments) == 0:
