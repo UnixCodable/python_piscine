@@ -6,41 +6,45 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/20 17:53:10 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/21 15:45:57 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/21 17:24:25 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 if __name__ == '__main__':
-    player_list = [['alice', True, 2300],
-                   ['bob', True, 1800],
-                   ['charlie', True, 2150],
-                   ['diana', False, 2050]]
+    player_list = [
+        ['alice', True, 2300],
+        ['bob', True, 1800],
+        ['charlie', True, 2150],
+        ['diana', False, 2050]
+        ]
     player_achievements_list = {
-                                'alice': [
-                                          'treasure_hunter',
-                                          'speed_runner',
-                                          'untouchable',
-                                          'first_quest',
-                                          'treasure_hunter'
-                                          ],
-                                'bob': [
-                                        'first_quest',
-                                        'treasure_hunter',
-                                        'speed_runner'
-                                        ],
-                                'charlie': [
-                                            'first_kill',
-                                            'level_10',
-                                            'boss_slayer',
-                                            'first_quest',
-                                            'treasure_hunter',
-                                            'speed_runner',
-                                            'untouchable'
-                                            ]
-                                }
+        'alice': [
+                'treasure_hunter',
+                'speed_runner',
+                'untouchable',
+                'first_quest',
+                'treasure_hunter'
+                ],
+        'bob': [
+                'first_quest',
+                'treasure_hunter',
+                'speed_runner'
+                ],
+        'charlie': [
+                'first_kill',
+                'level_10',
+                'boss_slayer',
+                'first_quest',
+                'treasure_hunter',
+                'speed_runner',
+                'untouchable'
+                ]
+            }
     score_categories = ['high', 'medium', 'low']
 
     print('=== Game Analytics Dashboard ===')
+
+#   -------------- List Comprehension --------------------
 
     print('\n=== List Comprehension Examples ===')
 
@@ -52,6 +56,8 @@ if __name__ == '__main__':
 
     print('Active players: ', end='')
     print([player[0] for player in player_list if player[1] is True])
+
+#   -------------- Dict Comprehension --------------------
 
     print('\n=== Dict Comprehension Examples ===')
 
@@ -67,21 +73,31 @@ if __name__ == '__main__':
     print({achievement[0]: len(achievement[1]) for achievement in
            player_achievements_list.items()})
 
+#   -------------- Set Comprehension --------------------
+
     player_zone = [['alice', 'north'],
                    ['bob', 'east'],
                    ['charlie', 'central'],
                    ['diana', 'north'],
                    ['diana', 'north']]
-    achievements_list = ['first_kill', 'level_10', 'boss_slayer',
-                         'boss_slayer']
+    achievements_list = [
+                         'first_kill',
+                         'level_10',
+                         'boss_slayer',
+                         'boss_slayer'
+                        ]
 
     print('\n=== Set Comprehension Examples ===')
+
     print('Unique players: ', end='')
     print({player[0] for player in player_zone})
     print('Unique achievements: ', end='')
     print({achievement for achievement in achievements_list})
     print('Active regions: ', end='')
     print({player[1] for player in player_zone})
+
+#   -------------- Global Analysis Comprehension --------------------
+
     achievements_list = [
                          'first_kill',
                          'level_10',
@@ -97,6 +113,7 @@ if __name__ == '__main__':
                          ]
 
     print('\n=== Combined Analysis ===')
+
     print('Total Players:', len(player_list))
     print('Total unique achievements:', len({achievement for achievement
                                              in achievements_list}))
