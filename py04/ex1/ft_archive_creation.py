@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/22 01:47:49 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/22 02:05:20 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/22 11:23:30 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -28,4 +28,4 @@ if __name__ == '__main__':
         print('Data inscription complete. Storage unit sealed.')
         print("Archive 'new_discovery.txt' ready for long-term preservation.")
     except Exception:
-        print('Error: Unit is already created')
+        print('Error: Cannot open or create the unit.')
