@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/28 00:29:56 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/02 03:39:20 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/02 10:02:50 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -52,7 +52,7 @@ class SensorStream(DataStream):
     def filter_data(self, data_batch: List[Any], criteria: Optional[str]
                     = None) -> List[Any]:
         if criteria is None:
-            return self.data
+            return self.__data
         try:
             to_dict = {d.split(':')[0]: float(d.split(':')[1]) for d in data_batch}
             to_dict[criteria]
