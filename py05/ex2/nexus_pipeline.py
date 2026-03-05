@@ -6,45 +6,12 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:00:13 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/04 10:46:01 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/05 02:08:55 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from abc import ABC, abstractmethod
-from typing import Any, Union, Protocol
-
-
-class ProcessingPipeline(ABC):
-    def __init__(self, pipeline_id: str):
-        self.id = pipeline_id
-
-    @abstractmethod
-    def process(self, data: Any) -> Union[str, Any]:
-        pass
-
-
-class JSONAdapter(ProcessingPipeline):
-    def __init__(self, pipeline_id: str):
-        super().__init__(pipeline_id)
-
-    def process(self, data: Any) -> Union[str, Any]:
-        pass
-
-
-class CSVAdapter(ProcessingPipeline):
-    def __init__(self, pipeline_id: str):
-        super().__init__(pipeline_id)
-
-    def process(self, data: Any) -> Union[str, Any]:
-        pass
-
-
-class StreamAdapter(ProcessingPipeline):
-    def __init__(self, pipeline_id: str):
-        super().__init__(pipeline_id)
-
-    def process(self, data: Any) -> Union[str, Any]:
-        pass
+from typing import Any, Union, Protocol, List
 
 
 class ProcessingStage(Protocol):
@@ -76,12 +43,46 @@ class OutputStage():
         pass
 
 
+class ProcessingPipeline(ABC):
+    def __init__(self, pipeline_id: str, stages_list: List[ProcessingStage]):
+        self.id = pipeline_id
+        self.stages = stages_list
+
+    @abstractmethod
+    def process(self, data: Any) -> Union[str, Any]:
+        pass
+
+
+class JSONAdapter(ProcessingPipeline):
+    def __init__(self, pipeline_id: str, stages_list: List[ProcessingStage]):
+        super().__init__(pipeline_id, stages_list)
+
+    def process(self, data: Any) -> Union[str, Any]:
+        pass
+
+
+class CSVAdapter(ProcessingPipeline):
+    def __init__(self, pipeline_id: str, stages_list: List[ProcessingStage]):
+        super().__init__(pipeline_id, stages_list)
+
+    def process(self, data: Any) -> Union[str, Any]:
+        pass
+
+
+class StreamAdapter(ProcessingPipeline):
+    def __init__(self, pipeline_id: str, stages_list: List[ProcessingStage]):
+        super().__init__(pipeline_id, stages_list)
+
+    def process(self, data: Any) -> Union[str, Any]:
+        pass
+
+
 class NexusManager():
     def __init__(self):
         print('\nInitializing Nexus Manager...')
         print('Pipeline capacity: 1000 streams/second')
 
-    def process_stages(self, stage: ProcessingStage) -> None:
+    def process_pipelines(self, pipelines: List[ProcessingPipeline]) -> None:
         pass
 
 
@@ -94,6 +95,7 @@ def main() -> None:
     output_stage = OutputStage()
     print('\n=== Multi-Format Data Processing ===')
     print('\nProcessing JSON data through pipeline...')
+    json_data = {"sensor": "temp", "value": 23.5, "unit": "C"}
 
 
 if __name__ == '__main__':
