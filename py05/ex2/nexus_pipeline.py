@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:00:13 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/05 15:04:06 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/06 08:14:54 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -42,7 +42,7 @@ class TransformStage():
 
     def process(self, data: Any) -> Any:
         if isinstance(data[0], JSONAdapter) is True:
-            data
+            data[1].update({'validated': True, 'metadata'})
         pass
 
 
@@ -64,7 +64,10 @@ class ProcessingPipeline(ABC):
         pass
 
     def add_stage(self, stage: ProcessingStage):
-        self.__stages.append(stage)
+        try:
+            self.__stages.append(stage)
+        except Exception as err:
+            print(f'Error while trying to add stage: {err}')
 
 
 class JSONAdapter(ProcessingPipeline):
@@ -110,11 +113,17 @@ class NexusManager():
     def __init__(self):
         print('\nInitializing Nexus Manager...')
         print('Pipeline capacity: 1000 streams/second')
+        self.__pipelines = []
 
-    def process_pipelines(self, pipelines_data:
-                          List[ProcessingPipeline, Any]) -> None:
-        for pipeline in pipelines_data:
-            pipeline[0].process(pipeline[1])
+    def process_data(self, data: List[Any]) -> None:
+        for index, pipeline in enumerate(self.pipelines):
+            pipeline.process(data[index])
+    
+    def add_pipeline(self, pipeline: ProcessingPipeline) -> None:
+        try:
+            self.__pipelines.append(pipeline)
+        except Exception as err:
+            print(f'Error while trying to add pipeline: {err}')
 
 
 def main() -> None:
