@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/08 02:16:38 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/08 02:22:47 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/08 13:07:48 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -14,7 +14,7 @@ from abc import ABC, abstractmethod
 
 
 class Card(ABC):
-    def __init__(self, name: str, cost: int, rarity: str):
+    def __init__(self, name: str, cost: int, rarity: str) -> None:
         self.name = name
         self.cost = cost
         self.rarity = rarity
