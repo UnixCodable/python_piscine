@@ -6,6 +6,13 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/10 01:25:26 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/10 01:25:27 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/10 09:04:18 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
+
+def main() -> None:
+    pass
+
+
+if __name__ == '__main__':
+    main()

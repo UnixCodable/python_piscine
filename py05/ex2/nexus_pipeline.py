@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:00:13 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/07 00:56:19 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/10 11:17:52 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -70,11 +70,11 @@ class OutputStage():
                     f'{data.get("value")}°{data.get("unit")} '
                     'data (Normal range)')
         if 'user' in data:
-            return (f'Output: {data.get('user')} activity logged: '
-                    f'{data.get('actions')} actions processed')
+            return (f'Output: {data.get("user")} activity logged: '
+                    f'{data.get("actions")} actions processed')
         if 'readings' in data:
             return (f'Output: Stream summary: {data.get("readings")} readings,'
-                    f' avg: {round(data.get('avg'), 2)}°C')
+                    f' avg: {round(data.get("avg"), 2)}°C')
         raise ValueError()
 
 
