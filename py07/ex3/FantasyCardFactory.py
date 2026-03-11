@@ -6,6 +6,101 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:34 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/11 11:57:35 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/11 17:15:03 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
+
+from ex0.Card import Card
+from ex0.CreatureCard import CreatureCard
+from ex1.ArtifactCard import ArtifactCard
+from ex1.SpellCard import SpellCard
+from ex3.CardFactory import CardFactory
+import random
+
+
+class FantasyCardFactory(CardFactory):
+    def create_creature(self, name_or_power: str | int | None = None) -> Card:
+        creatures = [
+            "Goblin",
+            "Dragon",
+            "Troll",
+            "Ogre",
+            "Orc",
+            "Ghoul",
+            "Lich",
+            "Demon",
+            "Giant",
+        ]
+        rarity = ['Legendary', 'Epic', 'Rare', 'Common']
+        if name_or_power is None:
+            return CreatureCard(random.choice(creatures),
+                                random.randint(1, 10),
+                                random.choice(rarity),
+                                random.randint(1, 7),
+                                random.randint(5, 12))
+        else:
+            return CreatureCard(name_or_power,
+                                random.randint(1, 10),
+                                random.choice(rarity),
+                                random.randint(1, 7),
+                                random.randint(5, 12))
+
+    def create_spell(self, name_or_power: str | int | None = None) -> Card:
+        creatures = [
+            "Goblin",
+            "Dragon",
+            "Troll",
+            "Ogre",
+            "Orc",
+            "Ghoul",
+            "Lich",
+            "Demon",
+            "Giant",
+        ]
+        rarity = ['Legendary', 'Epic', 'Rare', 'Common']
+        if name_or_power is None:
+            return SpellCard(random.choice(creatures),
+                             random.randint(1, 10),
+                             random.choice(rarity),
+                             random.randint(5, 12))
+        return SpellCard(name_or_power,
+                         random.randint(1, 10),
+                         random.choice(rarity),
+                         random.randint(1, 7),
+                         random.randint(5, 12))
+
+    def create_artifact(self, name_or_power: str | int | None = None) -> Card:
+        artifacts = [
+            "Ring of Eternal Ember",
+            "Ring of Whispering Shadows",
+            "Ring of the Astral Tide",
+            "Staff of Forgotten Stars",
+            "Staff of Verdant Awakening",
+            "Staff of the Storm Herald",
+            "Crystal of Arcane Resonance",
+            "Blade of Echoing Souls",
+            "Crown of the Eternal Sovereign",
+            "Crown of Shattered Light",
+            "Crown of the Dreaming Realm",
+            "Tome of Boundless Knowledge",
+            "Tome of the Arcane Tempest",
+            "Tome of Lost Prophecies"
+        ]
+        rarity = ['Legendary', 'Epic', 'Rare', 'Common']
+        if name_or_power is None:
+            return ArtifactCard(random.choice(artifacts),
+                                random.randint(1, 10),
+                                random.choice(rarity),
+                                random.randint(1, 7),
+                                random.randint(5, 12))
+        return ArtifactCard(name_or_power,
+                            random.randint(1, 10),
+                            random.choice(rarity),
+                            random.randint(1, 7),
+                            random.randint(5, 12))
+
+    def create_themed_deck(self, size: int) -> dict:
+        pass
+
+    def get_supported_types(self) -> dict:
+        pass

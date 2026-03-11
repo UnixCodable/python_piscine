@@ -6,19 +6,16 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:32 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/11 12:08:19 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/11 13:28:48 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 class GameEngine():
-    @staticmethod
-    def configure_engine(factory, strategy):
+    def configure_engine(self, factory, strategy) -> None:
         pass
 
-    @staticmethod
-    def simulate_turn():
+    def simulate_turn(self) -> dict:
         pass
 
-    @staticmethod
-    def get_engine_status():
+    def get_engine_status(self) -> dict:
         pass
