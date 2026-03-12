@@ -6,12 +6,13 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:28 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/12 02:22:41 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/12 16:56:18 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex3.GameEngine import GameEngine
 from ex3.FantasyCardFactory import FantasyCardFactory
+from ex1.Deck import Deck
 
 
 def main() -> None:
@@ -19,9 +20,10 @@ def main() -> None:
     print('\nConfiguring Fantasy Card Game...')
     engine = GameEngine()
     engine.configure_engine('FantasyCardFactory', 'AgressiveStrategy')
-    deck = FantasyCardFactory()
-    deck.create_themed_deck(10)
-    print('Available types:', deck.get_supported_types())
+    factory = FantasyCardFactory()
+    deck = factory.create_themed_deck(10)
+    hand = [deck['deck'].draw_card() for _ in range(3)]
+    print('Available types:', factory.get_supported_types())
     print('\nSimulating agressive turn...')
 
 

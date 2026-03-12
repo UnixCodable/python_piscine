@@ -6,11 +6,12 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:34 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/12 02:21:43 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/12 15:02:15 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.Card import Card
+from ex1.Deck import Deck
 from ex0.CreatureCard import CreatureCard
 from ex1.ArtifactCard import ArtifactCard
 from ex1.SpellCard import SpellCard
@@ -41,12 +42,11 @@ class FantasyCardFactory(CardFactory):
                                 random.choice(rarity),
                                 random.randint(1, 7),
                                 random.randint(5, 12))
-        else:
-            return CreatureCard(name_or_power,
-                                random.randint(1, 10),
-                                random.choice(rarity),
-                                random.randint(1, 7),
-                                random.randint(5, 12))
+        return CreatureCard(name_or_power,
+                            random.randint(1, 10),
+                            random.choice(rarity),
+                            random.randint(1, 7),
+                            random.randint(5, 12))
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
         elements = [
@@ -106,30 +106,51 @@ class FantasyCardFactory(CardFactory):
 
     def create_themed_deck(self, size: int) -> dict:
         card_type = [1, 2, 3]
-        deck = {}
+        deck = Deck()
         for index in range(size):
             chosen_type = random.choice(card_type)
             if chosen_type == 1:
-                new_card = self.create_creature()
-                self.__deck.append(new_card)
-                deck.update({index: new_card})
+                deck.add_card(self.create_creature())
             if chosen_type == 2:
-                new_card = self.create_artifact()
-                self.__deck.append(new_card)
-                deck.update({index: new_card})
+                deck.add_card(self.create_artifact())
             if chosen_type == 3:
-                new_card = self.create_spell()
-                self.__deck.append(new_card)
-                deck.update({index: new_card})
-        return deck
+                deck.add_card(self.create_spell())
+        return {'deck': deck}
 
     def get_supported_types(self) -> dict:
-        creatures = [card.name for card in self.__deck
-                     if isinstance(card, CreatureCard) is True]
-        spells = [card.name for card in self.__deck
-                  if isinstance(card, SpellCard) is True]
-        artifacts = [card.name for card in self.__deck
-                     if isinstance(card, ArtifactCard) is True]
+        creatures = [
+                "Goblin",
+                "Dragon",
+                "Troll",
+                "Ogre",
+                "Orc",
+                "Ghoul",
+                "Lich",
+                "Demon",
+                "Giant",
+        ]
+        spells = [
+            "Fire",
+            "Ice",
+            "Lightning",
+            "Tornado",
+        ]
+        artifacts = [
+            "Ring of Eternal Ember",
+            "Ring of Whispering Shadows",
+            "Ring of the Astral Tide",
+            "Staff of Forgotten Stars",
+            "Staff of Verdant Awakening",
+            "Staff of the Storm Herald",
+            "Crystal of Arcane Resonance",
+            "Blade of Echoing Souls",
+            "Crown of the Eternal Sovereign",
+            "Crown of Shattered Light",
+            "Crown of the Dreaming Realm",
+            "Tome of Boundless Knowledge",
+            "Tome of the Arcane Tempest",
+            "Tome of Lost Prophecies"
+        ]
         return {'creatures': creatures,
                 'spells': spells,
                 'artifacts': artifacts}
