@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/10 01:25:26 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/11 02:41:32 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/11 21:07:36 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -29,6 +29,7 @@ def main() -> None:
     print('Spell cast:', elite.cast_spell('Fireball', ['Ennemy1', 'Ennemy2']))
     print('Mana channel:', elite.channel_mana(3))
     print('\nMultiple interface implementation successful!')
+
 
 if __name__ == '__main__':
     main()

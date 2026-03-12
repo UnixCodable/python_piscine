@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:34 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/11 17:15:03 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/12 02:21:43 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -19,6 +19,9 @@ import random
 
 
 class FantasyCardFactory(CardFactory):
+    def __init__(self):
+        self.__deck = []
+
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
         creatures = [
             "Goblin",
@@ -46,28 +49,23 @@ class FantasyCardFactory(CardFactory):
                                 random.randint(5, 12))
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
-        creatures = [
-            "Goblin",
-            "Dragon",
-            "Troll",
-            "Ogre",
-            "Orc",
-            "Ghoul",
-            "Lich",
-            "Demon",
-            "Giant",
+        elements = [
+            "Fire",
+            "Ice",
+            "Lightning",
+            "Tornado",
         ]
+        effect_type = ['heal', 'buff', 'debuff', 'damage']
         rarity = ['Legendary', 'Epic', 'Rare', 'Common']
         if name_or_power is None:
-            return SpellCard(random.choice(creatures),
-                             random.randint(1, 10),
+            return SpellCard(random.choice(elements),
+                             random.randint(1, 7),
                              random.choice(rarity),
-                             random.randint(5, 12))
+                             random.choice(effect_type))
         return SpellCard(name_or_power,
-                         random.randint(1, 10),
-                         random.choice(rarity),
                          random.randint(1, 7),
-                         random.randint(5, 12))
+                         random.choice(rarity),
+                         random.choice(effect_type))
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
         artifacts = [
@@ -86,21 +84,52 @@ class FantasyCardFactory(CardFactory):
             "Tome of the Arcane Tempest",
             "Tome of Lost Prophecies"
         ]
+        effects = [
+            "Your spells deal 1 additional random damage to an enemy.",
+            "After you cast a spell, deal 1 damage to all enemy units.",
+            "The first spell you play each turn costs 1 less.",
+            "Your other units have +1 Attack while this is in play.",
+            "When you draw a card, it costs 1 less this turn.",
+        ]
         rarity = ['Legendary', 'Epic', 'Rare', 'Common']
         if name_or_power is None:
             return ArtifactCard(random.choice(artifacts),
-                                random.randint(1, 10),
+                                random.randint(1, 4),
                                 random.choice(rarity),
                                 random.randint(1, 7),
-                                random.randint(5, 12))
+                                random.choice(effects))
         return ArtifactCard(name_or_power,
                             random.randint(1, 10),
                             random.choice(rarity),
                             random.randint(1, 7),
-                            random.randint(5, 12))
+                            random.choice(effects))
 
     def create_themed_deck(self, size: int) -> dict:
-        pass
+        card_type = [1, 2, 3]
+        deck = {}
+        for index in range(size):
+            chosen_type = random.choice(card_type)
+            if chosen_type == 1:
+                new_card = self.create_creature()
+                self.__deck.append(new_card)
+                deck.update({index: new_card})
+            if chosen_type == 2:
+                new_card = self.create_artifact()
+                self.__deck.append(new_card)
+                deck.update({index: new_card})
+            if chosen_type == 3:
+                new_card = self.create_spell()
+                self.__deck.append(new_card)
+                deck.update({index: new_card})
+        return deck
 
     def get_supported_types(self) -> dict:
-        pass
+        creatures = [card.name for card in self.__deck
+                     if isinstance(card, CreatureCard) is True]
+        spells = [card.name for card in self.__deck
+                  if isinstance(card, SpellCard) is True]
+        artifacts = [card.name for card in self.__deck
+                     if isinstance(card, ArtifactCard) is True]
+        return {'creatures': creatures,
+                'spells': spells,
+                'artifacts': artifacts}
