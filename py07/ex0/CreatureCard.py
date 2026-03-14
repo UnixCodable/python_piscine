@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/08 02:16:35 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/09 02:11:58 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/13 15:18:38 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -38,10 +38,11 @@ class CreatureCard(Card):
                 'effect': 'Creature not summoned'}
 
     def attack_target(self, target) -> dict:
+        target.health -= self.attack
         return {'attacker': self.name,
                 'target': target.name,
                 'damage_dealt': self.attack,
-                'combat_resolved': True}
+                'combat_resolved': True if target.health < 1 else False}
 
     def get_card_info(self) -> dict:
         base_info = super().get_card_info()
