@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:34 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/12 15:02:15 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/12 18:13:40 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -104,7 +104,7 @@ class FantasyCardFactory(CardFactory):
                             random.randint(1, 7),
                             random.choice(effects))
 
-    def create_themed_deck(self, size: int) -> dict:
+    def create_themed_deck(self, size: int) -> Deck:
         card_type = [1, 2, 3]
         deck = Deck()
         for index in range(size):
@@ -115,7 +115,7 @@ class FantasyCardFactory(CardFactory):
                 deck.add_card(self.create_artifact())
             if chosen_type == 3:
                 deck.add_card(self.create_spell())
-        return {'deck': deck}
+        return deck
 
     def get_supported_types(self) -> dict:
         creatures = [
