@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:32 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/15 17:37:46 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/16 02:29:30 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -42,8 +42,9 @@ class GameEngine():
         self.simulated_turns += 1
         print('\nSimulating aggressive turn...')
         if self.playing == 0:
-            print(f'Hand: [{", ".join([f"{card.name} ({card.cost})"
-                                       for card in self.player_1.hand])}]')
+            hand = ', '.join([f'{card.name} ({card.cost})'
+                              for card in self.player_1.hand])
+            print(f"Hand: [{hand}]")
             print('\nTurn Execution:')
             print('Strategy:', self.strategy.get_strategy_name())
             executed_turn = self.strategy.execute_turn(self.player_1.hand,
@@ -52,8 +53,9 @@ class GameEngine():
             self.damage += executed_turn.get('damage_dealt', 0)
             self.playing = 1
         else:
-            print(f'Hand: [{", ".join([f"{card.name} ({card.cost})"
-                                       for card in self.player_2.hand])}]')
+            hand = ', '.join([f'{card.name} ({card.cost})'
+                              for card in self.player_2.hand])
+            print(f'Hand: [{hand}]')
             print('\nTurn Execution:')
             print('Strategy:', self.strategy.get_strategy_name())
             executed_turn = self.strategy.execute_turn(self.player_2.hand,
