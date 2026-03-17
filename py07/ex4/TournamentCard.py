@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/15 17:39:42 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/16 10:19:47 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/17 15:22:40 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,11 +17,12 @@ from ex4.Rankable import Rankable
 
 class TournamentCard(Card, Combatable, Rankable):
     def __init__(self, name: str, cost: int, rarity: str, attack: int,
-                 defense: int, id: str, ranking: int = 1200):
+                 defense: int, id: str, health: int, ranking: int = 1200):
         super().__init__(name, cost, rarity)
         self.__ranking = ranking
         self.__attack = attack
         self.__defense = defense
+        self.health = health
         self.id = id
         self.__wins = 0
         self.__losses = 0
@@ -41,7 +42,8 @@ class TournamentCard(Card, Combatable, Rankable):
         return {'damage_dealt': self.__attack}
 
     def calculate_rating(self) -> int:
-        return self.rating + (self.__wins - self.__losses) * 16
+        self.__ranking += (self.__wins - self.__losses) * 16
+        return self.__ranking
 
     def defend(self, incoming_damage: int) -> dict:
         incoming_damage -= self.__defense
