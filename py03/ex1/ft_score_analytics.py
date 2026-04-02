@@ -6,14 +6,14 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/02/12 22:59:53 by lbordana        #+#    #+#               #
-#  Updated: 2026/02/13 12:50:24 by lbordana        ###   ########.fr        #
+#  Updated: 2026/02/21 17:39:01 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 import sys
 
 
-def scores():
+def scores() -> None:
     print('=== Player Score Analytics ===')
     try:
         parsed_list = [int(items) for items in sys.argv[1:]]
