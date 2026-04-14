@@ -6,15 +6,15 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/19 01:00:31 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/04 00:25:02 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/14 17:55:04 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 print("LOADING STATUS: Loading programs\n")
 
 try:
-    import pandas
-    print(f"[OK] pandas ({pandas.__version__}) - Data manipulation ready")
+    import pandas as pd
+    print(f"[OK] pandas ({pd.__version__}) - Data manipulation ready")
     import numpy as np
     print(f"[OK] numpy ({np.__version__}) - Numerical computation ready")
     import requests
@@ -27,3 +27,14 @@ except ModuleNotFoundError as err:
     print("Use 'pip install -r requirements.txt'")
     print("Or 'poetry install' then 'poetry run python loading.py'")
 
+
+def transform():
+    
+    from matplotlib import pyplot as plt
+    data = requests.get("https://randomfox.ca/floof/")
+    image = requests.get(data.json()['image'])
+    plt.imshow(np.asarray(image.content, dtype=np.uint8))
+
+
+if __name__ == '__main__':
+    transform()

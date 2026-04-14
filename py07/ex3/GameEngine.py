@@ -6,9 +6,13 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/11 11:57:32 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/16 02:29:30 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 11:16:35 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
+
+from ex3.GameStrategy import GameStrategy
+from ex3.CardFactory import CardFactory
+
 
 class Player():
     def __init__(self, name: str) -> None:
@@ -29,7 +33,8 @@ class GameEngine():
         self.player_2 = Player('Enemy Player')
         self.playing = 0
 
-    def configure_engine(self, factory, strategy) -> None:
+    def configure_engine(self, factory: CardFactory,
+                         strategy: GameStrategy) -> None:
         self.factory = factory
         self.strategy = strategy
         self.deck = self.factory.create_themed_deck(30)

@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/10 01:25:32 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/11 02:38:23 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 11:13:14 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -44,7 +44,7 @@ class EliteCard(Card, Combatable, Magical):
         return {'casted_spells': self.__count_spell,
                 'casted_channeling': self.__count_channeling}
 
-    def attack(self, target) -> dict:
+    def attack(self, target: Card) -> dict:
         target.__health -= self.__attack
         return {'attacker': self.name,
                 'target': target.name,

@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/15 17:39:45 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/17 18:50:54 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 10:55:22 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -26,7 +26,7 @@ class TournamentPlatform():
         return (f'\n{card.name} (ID: {card.id})\n'
                 '- Interfaces: [Card, Combatable, Rankable]\n'
                 f'- Rating: {rank}\n'
-                f'- Record: {stats.get('wins', 0)}-{stats.get('losses', 0)}')
+                f'- Record: {stats.get("wins", 0)}-{stats.get("losses", 0)}')
 
     def create_match(self, card1_id: str, card2_id: str) -> dict:
         card1 = [card for card in self.__registered if card.id == card1_id][0]

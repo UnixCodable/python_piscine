@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/08 22:57:58 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/09 02:46:41 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 11:11:51 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -15,7 +15,7 @@ from random import shuffle as deck_shuffler
 
 
 class Deck():
-    def __init__(self):
+    def __init__(self) -> None:
         self.__deck = []
 
     def add_card(self, card: Card) -> None:
