@@ -6,9 +6,11 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/19 01:00:31 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/14 17:55:04 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/15 15:13:53 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
+
+import sys
 
 print("LOADING STATUS: Loading programs\n")
 
@@ -26,14 +28,16 @@ except ModuleNotFoundError as err:
     print("Please check dependencies in requirements.txt")
     print("Use 'pip install -r requirements.txt'")
     print("Or 'poetry install' then 'poetry run python loading.py'")
+    sys.exit(1)
 
 
 def transform():
-    
+
     from matplotlib import pyplot as plt
-    data = requests.get("https://randomfox.ca/floof/")
-    image = requests.get(data.json()['image'])
-    plt.imshow(np.asarray(image.content, dtype=np.uint8))
+
+    data = np.round(np.random.random(1000), 2)
+    plt.plot(xpoints, ypoints)
+    plt.show()
 
 
 if __name__ == '__main__':
