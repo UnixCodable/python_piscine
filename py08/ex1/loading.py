@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/19 01:00:31 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/15 15:13:53 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/16 11:34:08 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -31,14 +31,23 @@ except ModuleNotFoundError as err:
     sys.exit(1)
 
 
-def transform():
+def analysis():
 
     from matplotlib import pyplot as plt
 
+    print('\nAnalyzing Matrix data...')
     data = np.round(np.random.random(1000), 2)
-    plt.plot(xpoints, ypoints)
-    plt.show()
+
+    print('Processing 1000 data points...')
+    data_plot = pd.Series(data)
+    data_plot.plot()
+
+    print('Generating visualization...')
+    plt.savefig('matrix_analysis.png')
+
+    print('\nAnalysis complete!')
+    print('Results saved to: matrix_analysis.png')
 
 
 if __name__ == '__main__':
-    transform()
+    analysis()
