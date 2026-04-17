@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/15 17:39:21 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/17 18:52:34 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 10:55:45 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -32,7 +32,7 @@ def main() -> None:
         rank = card.get_rank_info().get('ranking', 0)
         stats = card.get_tournament_stats()
         print(f'{pos + 1}. {card.name} - Rating: {rank} '
-              f'({stats.get('wins', 0)}-{stats.get('losses', 0)})')
+              f'({stats.get("wins", 0)}-{stats.get("losses", 0)})')
     print('\nPlatform report:')
     print(tournament.generate_tournament_report())
     print('\n=== Tournament Platform Successfully Deployed! ===')

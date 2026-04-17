@@ -6,16 +6,18 @@
 #   By: lbordana <lbordana@student.42mulhouse.fr>   +#+  +:+       +#+        #
 #                                                 +#+#+#+#+#+   +#+           #
 #   Created: 2026/03/19 01:00:31 by lbordana           #+#    #+#             #
-#   Updated: 2026/04/05 01:10:28 by lbordana          ###   ########.fr       #
+#   Updated: 2026/04/17 10:26:57 by lbordana          ###   ########.fr       #
 #                                                                             #
 # *************************************************************************** #
+
+import sys
 
 print("LOADING STATUS: Loading programs\n")
 
 print("Checking dependencies:")
 try:
-    import pandas
-    print(f"[OK] pandas ({pandas.__version__}) - Data manipulation ready")
+    import pandas as pd
+    print(f"[OK] pandas ({pd.__version__}) - Data manipulation ready")
     import numpy as np
     print(f"[OK] numpy ({np.__version__}) - Numerical computation ready")
     import requests
@@ -27,3 +29,26 @@ except ModuleNotFoundError as err:
     print("Please check dependencies in requirements.txt")
     print("Use 'pip install -r requirements.txt'")
     print("Or 'poetry install' then 'poetry run python loading.py'")
+    sys.exit(1)
+
+
+def analysis():
+
+    from matplotlib import pyplot as plt
+
+    print('\nAnalyzing Matrix data...')
+    data = np.round(np.random.random(1000), 2)
+
+    print('Processing 1000 data points...')
+    data_plot = pd.Series(data)
+    data_plot.plot()
+
+    print('Generating visualization...')
+    plt.savefig('matrix_analysis.png')
+
+    print('\nAnalysis complete!')
+    print('Results saved to: matrix_analysis.png')
+
+
+if __name__ == '__main__':
+    analysis()

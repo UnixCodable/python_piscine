@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/15 17:39:42 by lbordana        #+#    #+#               #
-#  Updated: 2026/03/17 15:22:40 by lbordana        ###   ########.fr        #
+#  Updated: 2026/03/30 11:16:58 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -37,7 +37,7 @@ class TournamentCard(Card, Combatable, Rankable):
                 'mana_used': 0,
                 'effect': 'Creature not summoned'}
 
-    def attack(self, target) -> dict:
+    def attack(self, target: Card) -> dict:
         target.health -= self.__attack
         return {'damage_dealt': self.__attack}
 
