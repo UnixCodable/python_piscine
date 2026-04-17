@@ -6,7 +6,7 @@
 #   By: lbordana <lbordana@student.42mulhouse.fr>   +#+  +:+       +#+        #
 #                                                 +#+#+#+#+#+   +#+           #
 #   Created: 2026/03/19 01:00:31 by lbordana           #+#    #+#             #
-#   Updated: 2026/04/17 10:26:57 by lbordana          ###   ########.fr       #
+#   Updated: 2026/04/17 22:53:13 by lbordana          ###   ########.fr       #
 #                                                                             #
 # *************************************************************************** #
 
@@ -32,7 +32,7 @@ except ModuleNotFoundError as err:
     sys.exit(1)
 
 
-def analysis():
+def analysis() -> None:
 
     from matplotlib import pyplot as plt
 
