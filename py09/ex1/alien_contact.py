@@ -6,20 +6,22 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/22 20:16:12 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/23 00:53:24 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/24 01:07:56 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
+from typing import Self
 from pydantic import BaseModel, Field, ValidationError, model_validator
+from pydantic_core import PydanticCustomError
 from enum import Enum
 from datetime import datetime
 
 
 class ContactType(Enum):
-    radio = 'radio'
-    visual = 'visual'
-    physical = 'physical'
-    telepathic = 'telepathic'
+    RADIO = 'radio'
+    VISUAL = 'visual'
+    PHYSICAL = 'physical'
+    TELEPATHIC = 'telepathic'
 
 
 class AlienContact(BaseModel):
@@ -34,28 +36,39 @@ class AlienContact(BaseModel):
     is_verified: bool = Field(default=False)
 
     @model_validator(mode='after')
-    def check_contact(self):
+    def check_contact(self) -> Self:
         if self.contact_id[:2] != 'AC':
-            raise ValidationError("Contact ID must start with 'AC'.")
+            raise PydanticCustomError(
+                'Value Error',
+                "Contact ID must start with 'AC'."
+                )
         return self
 
     @model_validator(mode='after')
-    def check_physical(self):
-        if self.contact_type == 'physical' and self.is_verified is False:
-            raise ValidationError('Physical contact types must be verified.')
+    def check_physical(self) -> Self:
+        if self.contact_type.value == 'physical' and self.is_verified is False:
+            raise PydanticCustomError(
+                'Value Error',
+                'Physical contact types must be verified.'
+                )
         return self
 
     @model_validator(mode='after')
-    def check_telepathic(self):
-        if self.contact_type == 'telepathic' and self.witness_count < 3:
-            raise ValidationError('Telepathic contact requires at least 3'
-                                  'witnesses')
+    def check_telepathic(self) -> Self:
+        if self.contact_type.value == 'telepathic' and self.witness_count < 3:
+            raise PydanticCustomError(
+                'Value Error',
+                'Telepathic contact requires at least 3 witnesses'
+                )
         return self
 
     @model_validator(mode='after')
-    def check_signals(self):
+    def check_signals(self) -> Self:
         if self.signal_strength > 7 and self.message_received is None:
-            raise ValidationError('Strong signal (>7) must have message.')
+            raise PydanticCustomError(
+                'Value Error',
+                'Strong signal (>7) must have message.'
+                )
         return self
 
 
@@ -66,7 +79,7 @@ def main() -> None:
         alien = AlienContact(contact_id='AC_2024_001',
                              timestamp=datetime(2026, 2, 2),
                              location='Area 51, Nevada',
-                             contact_type=ContactType.radio,
+                             contact_type=ContactType.RADIO,
                              signal_strength=8.5,
                              duration_minutes=45,
                              witness_count=5,
@@ -88,14 +101,14 @@ def main() -> None:
         false_alien = AlienContact(contact_id='AC_2024_001',
                                    timestamp=datetime(2026, 2, 2),
                                    location='Area 51, Nevada',
-                                   contact_type=ContactType.telepathic,
+                                   contact_type=ContactType.TELEPATHIC,
                                    signal_strength=8.5,
                                    duration_minutes=45,
                                    witness_count=2,
                                    message_received='Greetings from Zeta')
         print('Valid contact report:')
         print('ID:', false_alien.contact_id)
-        print('Type:', false_alien.contact_type)
+        print('Type:', false_alien.contact_type.value)
         print('Location:', false_alien.location)
         print('Signal:', str(false_alien.signal_strength) + '/10')
         print('Duration:', false_alien.duration_minutes, 'minutes')
