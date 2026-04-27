@@ -38,7 +38,7 @@ def read_matrix() -> None:
                         'http://' else 'Disconnected'), 'to local instance')
     print('API Access:', ('Authenticated' if os.getenv('API_KEY') ==
                           'example123' else 'Unauthorized'))
-    print(f'Log Level: {'DEBUG' if os.getenv('LOG_LEVEL') == '1' else 'NONE'}')
+    print(f"Log Level: {'DEBUG' if os.getenv('LOG_LEVEL') == '1' else 'NONE'}")
     print('Zion Network:', ('Online' if os.getenv('ZION_ENDPOINT')[0:7] ==
                             'http://' else 'Offline'))
     print('\nEnvironment security check:')
