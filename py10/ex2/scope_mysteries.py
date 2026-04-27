@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/26 16:27:37 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/26 22:56:18 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/27 19:28:10 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -45,11 +45,9 @@ def memory_vault() -> dict[str, Callable]:
     vault: dict = {}
 
     def store(key, value) -> None:
-        nonlocal vault
         vault.update({key: value})
 
     def recall(key) -> str:
-        nonlocal vault
         return vault.get(key, 'Memory not found')
 
     return {'store': store, 'recall': recall}
