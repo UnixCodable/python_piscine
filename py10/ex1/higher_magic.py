@@ -6,7 +6,7 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/26 01:39:25 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/26 19:21:03 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/27 12:18:09 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -69,21 +69,21 @@ def main() -> None:
 
     print('\nTesting amplifyer...')
     amplifier = power_amplifier(attack_spell, 3)
-    print(f'Original: 10, Result: {amplifier('Dragon', 10)}')
+    print(f"Original: 10, Result: {amplifier('Dragon', 10)}")
 
     # Conditionnal cast
 
     print('\nTesting conditionnal casting...')
     conditionnal = conditional_caster(condition, attack_spell)
-    print(f'[VALID] Conditionnal casting : {conditionnal('Dragon', 7)}')
-    print(f'[INVALID] Conditionnal casting : {conditionnal('Dragon', 2)}')
+    print(f"[VALID] Conditionnal casting : {conditionnal('Dragon', 7)}")
+    print(f"[INVALID] Conditionnal casting : {conditionnal('Dragon', 2)}")
 
     # Sequence casting:
 
     print('\nTesting sequence casting...')
     spell_list = [attack_spell, heal_spell]
     sequence = spell_sequence(spell_list)
-    print(f'Sequence list of results : {sequence('Dragon', 5)}')
+    print(f"Sequence list of results : {sequence('Dragon', 5)}")
 
 
 if __name__ == '__main__':

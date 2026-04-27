@@ -6,13 +6,14 @@
 #  By: lbordana <lbordana@student.42mulhouse.f   +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/26 23:01:19 by lbordana        #+#    #+#               #
-#  Updated: 2026/04/27 02:00:20 by lbordana        ###   ########.fr        #
+#  Updated: 2026/04/27 15:59:25 by lbordana        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 import functools
 import operator
 from collections.abc import Callable
+from typing import Any
 
 
 def base_enchantment(power: int, element: str, target: str) -> str:
@@ -49,9 +50,25 @@ def memoized_fibonacci(n: int) -> int:
     return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 
 
-@functools.singledispatch
 def spell_dispatcher() -> Callable[[Any], str]:
-    pass
+
+    @functools.singledispatch
+    def base_spell(spell: Any):
+        return 'Unknown spell type'
+
+    @base_spell.register(int)
+    def damage_spell(spell: int):
+        return f'Damage spell: {spell} damage'
+
+    @base_spell.register(str)
+    def enchantment_spell(spell: str):
+        return f'Enchantment: {spell}'
+
+    @base_spell.register(list)
+    def multi_spell(spell: list):
+        return f'Multi-cast: {len(spell)} spells'
+
+    return base_spell
 
 
 def main() -> None:
@@ -85,6 +102,13 @@ def main() -> None:
     print(memoized_fibonacci.cache_info())  # For checking cache
 
     # Checking spell dispatcher
+
+    print('\nTesting spell dispatcher...')
+    spell = spell_dispatcher()
+    print(spell(42))
+    print(spell('fireball'))
+    print(spell([1, 2, 3]))
+    print(spell({'hello': 'world'}))
 
 
 if __name__ == '__main__':
